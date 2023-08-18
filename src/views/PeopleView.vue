@@ -1,6 +1,9 @@
 <template>
   <the-navbar />
-  <h1>People</h1>
+  <div class="h-bar">
+    <h1>People</h1>
+    <the-searchbar />
+  </div>
   <the-loading />
   <table class="people" v-if="!loading">
     <tr>
@@ -12,7 +15,7 @@
     </tr>
     <tr v-for="(item, i) in people" :key="i">
       <td>
-        <span @click="open(item.url)" class="link">{{ item.name }}</span>
+        <span @click="openPerson(item.url)" class="link">{{ item.name }}</span>
       </td>
       <td>{{ item.height }}</td>
       <td>{{ item.mass }}</td>
@@ -29,22 +32,23 @@ import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import TheNavbar from '@/components/TheNavbar.vue'
+import TheSearchbar from '@/components/TheSearchbar.vue'
 import TheLoading from '@/components/TheLoading.vue'
 
 export default defineComponent({
-  components: { TheNavbar, TheLoading },
+  components: { TheNavbar, TheSearchbar, TheLoading },
 
   setup() {
     const store = useStore()
     const router = useRouter()
-    const loading = computed(() => store.getters.loading)
-    const people = computed(() => store.getters.people)
+    const loading = computed<boolean>(() => store.getters.loading)
+    const people = computed<any[]>(() => store.getters.people)
 
 		onMounted(async () => {
 			await store.dispatch('getPeoples')
 		})
 
-    const open = (url: string): void => {
+    const openPerson = (url: string): void => {
       const localUrl = url.replace("https://swapi.dev/api/people/", "/peoples/").slice(0, -1)
       router.push(localUrl)
     }
@@ -52,17 +56,8 @@ export default defineComponent({
     return {
       loading,
       people,
-      open
+      openPerson
     }
   }
 })
 </script>
-
-<style scoped>
-
-.link:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-</style>

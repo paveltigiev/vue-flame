@@ -1,6 +1,7 @@
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #c4dbc8;
+  --additional-color: #f3f3f3;
 }
 
 body {
@@ -22,7 +23,6 @@ a {
 }
 table {
   width: 100%;
-  border: 1px solid var(--primary-color);
   border-collapse: collapse;
 }
 th, td {
@@ -43,4 +43,13 @@ th, td {
 .router-link-exact-active {
   text-decoration: none;
   font-weight: bold;
+}
+.h-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

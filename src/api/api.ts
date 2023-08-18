@@ -11,6 +11,17 @@ export async function getPeoplesRequest() {
   }
 }
 
+export async function findPeopleRequest(query: string) {
+  try {
+    const response = await fetch(`${apiUrl}/people/?search=${query}`)
+    const { results } = await response.json()
+    return results
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
+
 export async function getPersonRequest(id: number) {
   try {
     const response = await fetch(`${apiUrl}/people/${id}`)
