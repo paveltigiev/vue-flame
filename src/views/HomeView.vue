@@ -1,14 +1,18 @@
 <template>
-  <div class="home">
+  <div class="home-page">
+    <router-link to="/peoples">Peoples</router-link> |
+    <router-link to="/favorites">Favorites</router-link>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'HomeView',
-  components: {
-  },
-});
-</script>
+<style scoped>
+  .home-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 64px);
+    gap: 16px;
+    font-size: 6em;
+  }
+</style>
