@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { openPerson } from '@/helpers/opener'
 import TheNavbar from '@/components/TheNavbar.vue'
 import TheSearchbar from '@/components/TheSearchbar.vue'
 import TheLoading from '@/components/TheLoading.vue'
@@ -41,18 +41,12 @@ export default defineComponent({
 
   setup() {
     const store = useStore()
-    const router = useRouter()
     const loading = computed<boolean>(() => store.getters.loading)
     const people = computed<Person[]>(() => store.getters.people)
 
 		onMounted(async () => {
 			await store.dispatch('getPeoples')
 		})
-
-    const openPerson = (url: string): void => {
-      const localUrl = url.replace("https://swapi.dev/api/people/", "/peoples/").slice(0, -1)
-      router.push(localUrl)
-    }
 
     return {
       loading,

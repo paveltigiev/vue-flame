@@ -37,14 +37,13 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, computed, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { openPerson } from '@/helpers/opener'
 import Person from '@/types/person'
 
 export default defineComponent({
   setup () {
     const store = useStore()
-		const router = useRouter()
     const searching = computed<boolean>(() => store.getters.searching)
     const foundPeople = computed<Person[]>(() => store.getters.foundPeople)
 		const name = ref<string>('')
@@ -66,10 +65,10 @@ export default defineComponent({
       findPeople(query)
     })
 
-    const openPerson = (url: string): void => {
-      const localUrl = url.replace("https://swapi.dev/api/people/", "/peoples/").slice(0, -1)
-      router.push(localUrl)
-    }
+    // const openPerson = (url: string): void => {
+    //   const localUrl = url.replace("https://swapi.dev/api/people/", "/peoples/").slice(0, -1)
+    //   router.push(localUrl)
+    // }
 
 		onUnmounted((): void => {
 			store.dispatch('findPeople', '')
