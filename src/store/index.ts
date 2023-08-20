@@ -1,10 +1,11 @@
 import { createStore } from 'vuex'
 import { getPeoplesRequest, findPeopleRequest, getPersonRequest } from '@/api/api'
+import Person from '@/types/person'
 
 interface State {
-  people: object[] | null
-  foundPeople: object[] | null
-  person: object | null
+  people: Person[] | null;
+  foundPeople: Person[] | null;
+  person: Person | null;
   loading: boolean
   searching: boolean
 }
@@ -19,13 +20,13 @@ export default createStore({
   } as State,
 
   getters: {
-    people(state: State): object[] | null {
-      return state.people
+    people(state: State): Person[] | null {
+      return state.people;
     },
-    foundPeople(state: State): object[] | null {
-      return state.foundPeople
+    foundPeople(state: State): Person[] | null {
+      return state.foundPeople;
     },
-    person(state: State): object | null {
+    person(state: State): Person | null {
       return state.person
     },
     loading(state: State): boolean {
@@ -37,13 +38,13 @@ export default createStore({
   },
 
   mutations: {
-    setPeople(state: State, payload: object[]): void {
+    setPeople(state: State, payload: Person[]): void {
       state.people = payload
     },
-    setFoundPeople(state: State, payload: object[]): void {
+    setFoundPeople(state: State, payload: Person[]): void {
       state.foundPeople = payload
     },
-    setPerson(state: State, payload: object): void {
+    setPerson(state: State, payload: Person): void {
       state.person = payload
     },
     setLoading(state: State, payload: boolean): void {

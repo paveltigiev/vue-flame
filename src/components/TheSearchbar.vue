@@ -39,13 +39,14 @@
 import { defineComponent, ref, watch, computed, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import Person from '@/types/person'
 
 export default defineComponent({
   setup () {
     const store = useStore()
 		const router = useRouter()
     const searching = computed<boolean>(() => store.getters.searching)
-    const foundPeople = computed<any[]>(() => store.getters.foundPeople)
+    const foundPeople = computed<Person[]>(() => store.getters.foundPeople)
 		const name = ref<string>('')
 		const isSearchFocused = ref<boolean>(false);
 
@@ -66,7 +67,6 @@ export default defineComponent({
     })
 
     const openPerson = (url: string): void => {
-			console.log('eee')
       const localUrl = url.replace("https://swapi.dev/api/people/", "/peoples/").slice(0, -1)
       router.push(localUrl)
     }

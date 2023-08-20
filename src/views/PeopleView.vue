@@ -34,6 +34,7 @@ import { useRouter } from 'vue-router'
 import TheNavbar from '@/components/TheNavbar.vue'
 import TheSearchbar from '@/components/TheSearchbar.vue'
 import TheLoading from '@/components/TheLoading.vue'
+import Person from '@/types/person'
 
 export default defineComponent({
   components: { TheNavbar, TheSearchbar, TheLoading },
@@ -42,7 +43,7 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
     const loading = computed<boolean>(() => store.getters.loading)
-    const people = computed<any[]>(() => store.getters.people)
+    const people = computed<Person[]>(() => store.getters.people)
 
 		onMounted(async () => {
 			await store.dispatch('getPeoples')

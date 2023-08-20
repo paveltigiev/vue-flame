@@ -22,6 +22,7 @@ import { useRoute } from 'vue-router'
 import { RouteLocationRaw } from 'vue-router'
 import TheNavbar from '@/components/TheNavbar.vue'
 import TheLoading from '@/components/TheLoading.vue'
+import Person from '@/types/person'
 
 export default defineComponent({
   components: { TheNavbar, TheLoading },
@@ -34,8 +35,8 @@ export default defineComponent({
       const idParam = route.params.id
       return typeof idParam === 'string' ? parseInt(idParam) : idParam
     })
-    const loading = computed(() => store.getters.loading)
-    const person = computed(() => store.getters.person)
+    const loading = computed<boolean>(() => store.getters.loading)
+    const person = computed<Person>(() => store.getters.person)
 
     const next = () => {
       const nextId = Number(id.value) + 1
