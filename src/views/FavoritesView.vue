@@ -50,11 +50,10 @@ export default defineComponent({
 
   setup() {
     const store = useStore()
-    const currentFavorites = computed<Person[]>(() => store.getters.currentFavorites)
+    const currentFavorites = computed<Person[]>(() => store.getters['favorites/currentFavorites'])
 
     onMounted(() => {
-      store.dispatch('getPeoples')
-      store.dispatch('getCurrentFavorites')
+      store.dispatch('favorites/getCurrentFavorites')
 		})
 
     return {

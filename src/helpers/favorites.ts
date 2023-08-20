@@ -13,5 +13,5 @@ export function toggleFavorite (person: Person, currentFavorites: Person[]): voi
 }
 
 export function favoriteButtonText(person: Person, currentFavorites: Person[]): string {
-  return currentFavorites.some(favorite => favorite.name === person.name) ? 'Remove Favorite' : 'Add Favorite'
+  return currentFavorites.some(favorite => favorite?.name === person?.name) ? 'Remove Favorite' : 'Add Favorite'
 }

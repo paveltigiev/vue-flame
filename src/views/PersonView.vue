@@ -53,8 +53,8 @@ export default defineComponent({
       return typeof idParam === 'string' ? parseInt(idParam) : idParam
     })
     const loading = computed<boolean>(() => store.getters.loading)
-    const person = computed<Person>(() => store.getters.person)
-    const currentFavorites = computed<Person[]>(() => store.getters.currentFavorites)
+    const person = computed<Person>(() => store.getters['people/person'])
+    const currentFavorites = computed<Person[]>(() => store.getters['favorites/currentFavorites'])
 
     const nextPerson = () => {
       const nextId = Number(id.value) + 1
@@ -63,11 +63,11 @@ export default defineComponent({
     }
 
 		watch(id, () => {
-			store.dispatch('getPerson', id.value)
+			store.dispatch('people/getPerson', id.value)
 		})
 
 		onMounted(async () => {
-			await store.dispatch('getPerson', id.value)
+			await store.dispatch('people/getPerson', id.value)
 		})
 
     return {

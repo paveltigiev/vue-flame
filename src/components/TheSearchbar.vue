@@ -45,7 +45,7 @@ export default defineComponent({
   setup () {
     const store = useStore()
     const searching = computed<boolean>(() => store.getters.searching)
-    const foundPeople = computed<Person[]>(() => store.getters.foundPeople)
+    const foundPeople = computed<Person[]>(() => store.getters['people/foundPeople'])
 		const name = ref<string>('')
 		const isSearchFocused = ref<boolean>(false);
 
@@ -57,7 +57,7 @@ export default defineComponent({
 			}
 
 			debounceTimer = setTimeout((): void => {
-				store.dispatch('findPeople', query)
+				store.dispatch('people/findPeople', query)
 			}, 1000)
 		};
 
@@ -71,7 +71,7 @@ export default defineComponent({
     // }
 
 		onUnmounted((): void => {
-			store.dispatch('findPeople', '')
+			store.dispatch('people/findPeople', '')
     })
 
 		return {
