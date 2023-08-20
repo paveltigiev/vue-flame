@@ -13,15 +13,20 @@
       <th>hair_color</th>
       <th>Add Favorite/Remove favorite</th>
     </tr>
-    <tr v-for="(item, i) in people" :key="i">
+    <tr v-for="(person, i) in people" :key="i">
       <td>
-        <span @click="openPerson(item.url)" class="link">{{ item.name }}</span>
+        <span @click="openPerson(person.url)" class="link">{{ person.name }}</span>
       </td>
-      <td>{{ item.height }}</td>
-      <td>{{ item.mass }}</td>
-      <td>{{ item.hair_color === 'n/a' ? '🤷🏻‍♂️' : item.hair_color }}</td>
+      <td>{{ person.height }}</td>
+      <td>{{ person.mass }}</td>
+      <td>{{ getHairColor(person.hair_color) }}</td>
       <td>
-        <button class="btn">Add Favorite</button>
+        <button
+          class="btn"
+          @click="toggleFavorite(person, currentFavorites)"
+        >
+          {{ favoriteButtonText(person, currentFavorites) }}
+        </button>
       </td>
     </tr>
   </table>
@@ -31,6 +36,9 @@
 import { defineComponent, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { openPerson } from '@/helpers/opener'
+import { toggleFavorite } from '@/helpers/favorites'
+import { favoriteButtonText } from '@/helpers/favorites'
+import { getHairColor } from '@/helpers/colors'
 import TheNavbar from '@/components/TheNavbar.vue'
 import TheSearchbar from '@/components/TheSearchbar.vue'
 import TheLoading from '@/components/TheLoading.vue'
@@ -43,15 +51,21 @@ export default defineComponent({
     const store = useStore()
     const loading = computed<boolean>(() => store.getters.loading)
     const people = computed<Person[]>(() => store.getters.people)
+    const currentFavorites = computed<Person[]>(() => store.getters.currentFavorites)
 
-		onMounted(async () => {
-			await store.dispatch('getPeoples')
+    onMounted(() => {
+      store.dispatch('getPeoples')
+      store.dispatch('getCurrentFavorites')
 		})
 
     return {
       loading,
       people,
-      openPerson
+      currentFavorites,
+      getHairColor,
+      openPerson,
+      toggleFavorite,
+      favoriteButtonText
     }
   }
 })

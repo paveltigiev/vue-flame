@@ -3,9 +3,10 @@ import { getPeoplesRequest, findPeopleRequest, getPersonRequest } from '@/api/ap
 import Person from '@/types/person'
 
 interface State {
-  people: Person[] | null;
-  foundPeople: Person[] | null;
-  person: Person | null;
+  people: Person[] | null
+  foundPeople: Person[] | null
+  person: Person | null
+  currentFavorites: Person[] | null
   loading: boolean
   searching: boolean
 }
@@ -15,8 +16,9 @@ export default createStore({
     people: null,
     foundPeople: null,
     person: null,
+    currentFavorites: null,
     loading: false,
-    searching: false
+    searching: false,
   } as State,
 
   getters: {
@@ -29,12 +31,15 @@ export default createStore({
     person(state: State): Person | null {
       return state.person
     },
+    currentFavorites(state: State): Person[] | null {
+      return state.currentFavorites
+    },
     loading(state: State): boolean {
       return state.loading
     },
     searching(state: State): boolean {
       return state.searching
-    },
+    }
   },
 
   mutations: {
@@ -46,6 +51,9 @@ export default createStore({
     },
     setPerson(state: State, payload: Person): void {
       state.person = payload
+    },
+    setCurrentFavorites(state: State, payload: Person[]): void {
+      state.currentFavorites = payload
     },
     setLoading(state: State, payload: boolean): void {
       state.loading = payload
@@ -77,5 +85,9 @@ export default createStore({
       commit('setPerson', person)
       commit('setLoading', false)
     },
+    getCurrentFavorites({commit}) {
+      const _currentFavoritesJSON = localStorage.getItem('favoritePeople')
+      commit('setCurrentFavorites', _currentFavoritesJSON ? JSON.parse(_currentFavoritesJSON) : [])
+    }
   },
 })
