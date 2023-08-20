@@ -4,7 +4,7 @@
     <h1>Favorites</h1>
     <the-searchbar />
   </div>
-  <table class="favorites" v-if="currentFavorites.length > 0">
+  <table class="people" v-if="currentFavorites.length > 0">
     <tr>
       <th>name</th>
       <th>height</th>

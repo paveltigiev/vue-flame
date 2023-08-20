@@ -99,7 +99,7 @@ export default defineComponent({
 	position: relative;
 	color: var(--primary-color);
 	border: 1px solid var(--primary-color);
-	background: var(--additional-color);
+	background: #fff;
 	padding: 8px 32px 8px 16px;
 	border-radius: 8px;
 	cursor: pointer;
@@ -126,7 +126,7 @@ export default defineComponent({
 	flex-direction: column;
 	color: var(--primary-color);
 	border: 1px solid var(--primary-color);
-	background: var(--additional-color);
+	background: #fff;
 	padding: 8px 16px;
 	border-radius: 8px;
 	width: 200px;
