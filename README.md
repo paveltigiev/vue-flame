@@ -1,4 +1,4 @@
-# vue-flame-test
+# vue-flame
 
 ## Project setup
 ```
